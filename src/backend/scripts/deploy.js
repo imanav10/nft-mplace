@@ -4,10 +4,8 @@ async function main() {
     console.log("Account balance:", (await ethers.provider.getBalance(deployer.address)).toString());
   
     const NFT = await ethers.getContractFactory("NFT");
-    console.log("Deploying NFT contract...");
     const nft = await NFT.deploy();
   
-    console.log("Waiting for deployment...");
     // Wait for the contract to be mined
     await nft.waitForDeployment();
   
