@@ -1,34 +1,45 @@
 async function main() {
     const [deployer] = await ethers.getSigners();
-  
     console.log("Deploying contracts with the account:", deployer.address);
-    console.log("Account balance:", await deployer.provider.getBalance(deployer.address));
+    console.log("Account balance:", (await ethers.provider.getBalance(deployer.address)).toString());
   
-    
-    // Get the ContractFactories and Signers here.
     const NFT = await ethers.getContractFactory("NFT");
+    console.log("Deploying NFT contract...");
     const nft = await NFT.deploy();
-    // Save copies of each contracts abi and address to the frontend.
-    console.log("NFT CONTACT ADDRESS",nft.address)
-    saveFrontendFiles(nft , "NFT");
-    
+  
+    console.log("Waiting for deployment...");
+    // Wait for the contract to be mined
+    await nft.waitForDeployment();
+  
+    const nftAddress = await nft.getAddress();
+    console.log("NFT CONTRACT ADDRESS", nftAddress);
+    saveFrontendFiles(nft, "NFT");
   }
   
-  function saveFrontendFiles(contract, name) {
+  async function saveFrontendFiles(contract, name) {
     const fs = require("fs");
     const contractsDir = __dirname + "/../../frontend/contractsData";
-  
     if (!fs.existsSync(contractsDir)) {
       fs.mkdirSync(contractsDir);
     }
   
-    fs.writeFileSync(
-      contractsDir + `/${name}-address.json`,
-      JSON.stringify({ address: contract.address }, undefined, 2)
-    );
+    const contractAddress = await contract.getAddress();
+    console.log("Contract address:", contractAddress);
+  
+    const addressData = JSON.stringify({ address: contractAddress }, undefined, 2);
+    console.log("Address data to be written:", addressData);
+  
+    const filePath = contractsDir + `/${name}-address.json`;
+    console.log("Writing to file:", filePath);
+  
+    try {
+      fs.writeFileSync(filePath, addressData);
+      console.log("File written successfully");
+    } catch (error) {
+      console.error("Error writing file:", error);
+    }
   
     const contractArtifact = artifacts.readArtifactSync(name);
-  
     fs.writeFileSync(
       contractsDir + `/${name}.json`,
       JSON.stringify(contractArtifact, null, 2)
