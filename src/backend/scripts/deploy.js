@@ -5,14 +5,23 @@ async function main() {
   
     const NFT = await ethers.getContractFactory("NFT");
     const nft = await NFT.deploy();
+    const Marketplace = await ethers.getContractFactory("Marketplace");
+    const marketplace = await Marketplace.deploy(1)
   
     // Wait for the contract to be mined
     await nft.waitForDeployment();
+    await marketplace.waitForDeployment();
   
     const nftAddress = await nft.getAddress();
+    const marketplaceAddress = await marketplace.getAddress()
     console.log("NFT CONTRACT ADDRESS", nftAddress);
+    console.log("MARKETPLACE CONTACT ADDRESS", marketplaceAddress);
+
     saveFrontendFiles(nft, "NFT");
+    saveFrontendFiles(marketplace, "Marketplace")
+
     await nftAddress
+    await marketplaceAddress
   }
   
   async function saveFrontendFiles(contract, name) {
@@ -23,17 +32,13 @@ async function main() {
     }
   
     const contractAddress = await contract.getAddress();
-    console.log("Contract address:", contractAddress);
   
     const addressData = JSON.stringify({ address: contractAddress }, undefined, 2);
-    console.log("Address data to be written:", addressData);
   
     const filePath = contractsDir + `/${name}-address.json`;
-    console.log("Writing to file:", filePath);
   
     try {
       fs.writeFileSync(filePath, addressData);
-      console.log("File written successfully");
     } catch (error) {
       console.error("Error writing file:", error);
     }
