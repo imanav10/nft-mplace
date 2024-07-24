@@ -12,6 +12,7 @@ async function main() {
     const nftAddress = await nft.getAddress();
     console.log("NFT CONTRACT ADDRESS", nftAddress);
     saveFrontendFiles(nft, "NFT");
+    await nftAddress
   }
   
   async function saveFrontendFiles(contract, name) {
