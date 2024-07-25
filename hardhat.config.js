@@ -9,4 +9,9 @@ module.exports = {
     cache: "./src/backend/cache",
     tests: "./src/backend/test"
   },
+  networks: {
+    hardhat: {
+      chainId: 1337
+    }
+  },
 };
