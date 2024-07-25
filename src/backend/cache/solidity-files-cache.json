@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/imanav10/projects/nft-mplace/src/backend/contracts/Marketplace.sol": {
-      "lastModificationDate": 1721827098238,
-      "contentHash": "90e7a9eee30103b4475b800486b5d984",
+      "lastModificationDate": 1721908628482,
+      "contentHash": "b036daa71d5dce800ee9bba247e89389",
       "sourceName": "src/backend/contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.24",
@@ -640,7 +640,7 @@
       ]
     },
     "/home/imanav10/projects/nft-mplace/src/backend/contracts/NFT.sol": {
-      "lastModificationDate": 1721675052608,
+      "lastModificationDate": 1721908624700,
       "contentHash": "e82cb459b6c4540e5cbcc69c28572628",
       "sourceName": "src/backend/contracts/NFT.sol",
       "solcConfig": {
@@ -712,6 +712,42 @@
       ],
       "artifacts": [
         "Counters"
+      ]
+    },
+    "/home/imanav10/projects/nft-mplace/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1721649216676,
+      "contentHash": "896f68942c3a20e9ae3c3c5bfd3add54",
+      "sourceName": "hardhat/console.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.4.22 <0.9.0"
+      ],
+      "artifacts": [
+        "console"
       ]
     }
   }
